@@ -18,6 +18,9 @@ func NewHashCalculator() HashCalculator {
 }
 
 func (h *hashCalculatorImpl) Hash(requestContentType, requestBody string) (string, error) {
+	if requestBody == "" {
+		return "empty", nil
+	}
 	m := md5.New()
 	if _, err := io.WriteString(m, requestContentType); err != nil {
 		return "", errors.Wrap(err, "failed to write string")

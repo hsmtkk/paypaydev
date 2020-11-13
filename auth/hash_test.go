@@ -12,4 +12,9 @@ func TestHash(t *testing.T) {
 	got, err := auth.NewHashCalculator().Hash(exampleParameter.RequestContentType, exampleParameter.RequestBody)
 	assert.Nil(t, err)
 	assert.Equal(t, want, got)
+
+	want = "empty"
+	got, err = auth.NewHashCalculator().Hash("", "")
+	assert.Nil(t, err)
+	assert.Equal(t, want, got)
 }

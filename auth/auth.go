@@ -4,10 +4,17 @@ import (
 	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
+	"net/http"
 	"strconv"
 
 	"github.com/pkg/errors"
 )
+
+type Credential struct {
+	APIKey       string
+	APIKeySecret string
+	MerchantID   string
+}
 
 type HMACAuthHeaderParameter struct {
 	APIKey             string
@@ -37,6 +44,9 @@ func NewForTest(epochGetter EpochGetter, nonceGetter NonceGetter, hashCalculator
 }
 
 func (h *hmacAuthHeaderGeneratorImpl) HMACAuthHeader(param HMACAuthHeaderParameter) (string, error) {
+	if param.RequestMethod == http.MethodGet {
+		param.RequestContentType = "empty"
+	}
 	epoch := h.epochGetter.Epoch()
 	nonce := h.nonceGetter.Nonce()
 	hash, err := h.hashCalculator.Hash(param.RequestContentType, param.RequestBody)
