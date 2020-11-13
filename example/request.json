@@ -1,0 +1,21 @@
+{
+    "merchantPaymentId": "003",
+    "codeType": "ORDER_QR",
+    "redirectUrl": "http://foobar.com",
+    "redirectType":"WEB_LINK",
+    "orderDescription":"Example - Mune Cake shop",
+    "orderItems": [{
+        "name": "Moon cake",
+        "category": "pasteries",
+        "quantity": 1,
+        "productId": "67678",
+        "unitPrice": {
+            "amount": 1,
+            "currency": "JPY"
+        }
+    }],
+    "amount": {
+        "amount": 1,
+        "currency": "JPY"
+    }
+}
